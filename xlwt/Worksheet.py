@@ -1415,3 +1415,17 @@ class Worksheet(object):
             self.__flushed_rows[rowx] = 1
         self.__update_row_visible_levels()
         self.__rows = {}
+
+
+# copy sheet
+def copySheet(workbook, source_index, new_name): 
+    '''
+    # workbook     == source + book in use 
+    # source_index == index of sheet you want to copy (0 start) 
+    # new_name     == name of new copied sheet 
+    '''
+    import copy
+    copied_sheet = copy.deepcopy(workbook.get_sheet(source_index)) 
+    workbook._Workbook__worksheets.append(copied_sheet) 
+    copied_sheet.set_name(new_name) 
+    return copied_sheet
